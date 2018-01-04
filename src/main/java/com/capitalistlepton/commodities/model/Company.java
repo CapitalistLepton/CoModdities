@@ -60,20 +60,30 @@ public class Company {
 			throw new IllegalArgumentException("Amount must be >= 0");
 		}
 		if (inventory.containsKey(r)) {
-			inventory.put(r, inventory.get(r) - amount);
+			if (inventory.get(r) >= amount) {
+				inventory.put(r, inventory.get(r) - amount);
+			} else {
+				throw new IllegalArgumentException("Not enough resources to sell");
+			}
 		} else {
-			throw new IllegalArgumentException("Resource " + r.getName() + " is not in the company's inventory");
+			throw new IllegalArgumentException("Resource " + r.getName() + 
+					" is not in the company's inventory");
 		}
 	}
 	
 	/**
-	 * Returns the amount of the specified resource in the inventory
+	 * Returns the amount of the specified resource in the inventory. Returns 0 if the resource is
+	 * not in the inventory.
 	 * 
 	 * @param r Resource to check
 	 * @return amount of Resources
 	 */
 	public int amountOf(Resource r) {
-		return inventory.get(r);
+		if (inventory.containsKey(r)) {
+			return inventory.get(r);
+		} else {
+			return 0;
+		}
 	}
 	
 	/** Returns a String representation of the company and its assets */
