@@ -39,7 +39,7 @@ public class CompanyTest {
 			fail("Exception not thrown");
 		} catch (IllegalArgumentException e) {}
 		co1.addResource(LUMBER, 45);
-		assertEquals(45, co1.amountOf(LUMBER));
+		assertEquals(45, co1.getAmount(LUMBER.getSym()));
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class CompanyTest {
 			fail("Exception not thrown");
 		} catch (IllegalArgumentException e) {}
 		co2.removeResource(LUMBER, 45);
-		assertEquals(0, co2.amountOf(LUMBER));
+		assertEquals(0, co2.getAmount(LUMBER.getSym()));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -60,6 +60,6 @@ public class CompanyTest {
 
 	@Test
 	public void testAmountOf() {
-		assertEquals(0, co3.amountOf(LUMBER));
+		assertEquals(0, co3.getAmount(LUMBER.getSym()));
 	}
 }

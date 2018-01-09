@@ -31,7 +31,7 @@ public abstract class MarketAction {
 	public static final MarketAction SELL = new MarketAction() {
 		@Override
 		public boolean validator(Company co, Market m, String symbol, int amount) {
-			return (m.getAmount(symbol) >= amount && amount >= 0);
+			return (co.getAmount(symbol) >= amount && amount >= 0);
 		}
 
 		@Override

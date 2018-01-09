@@ -55,11 +55,11 @@ public class Company {
 	 * Returns the amount of the specified resource in the inventory. Returns 0 if the resource is
 	 * not in the inventory.
 	 * 
-	 * @param r Resource to check
+	 * @param symbol String symbol of Resource to check
 	 * @return amount of Resources
 	 */
-	public int amountOf(Resource r) {
-		return inventory.getAmount(r.getSym());
+	public int getAmount(String symbol) {
+		return inventory.getAmount(symbol);
 	}
 	
 	/** Returns a String representation of the company and its assets */

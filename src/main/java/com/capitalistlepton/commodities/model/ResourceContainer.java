@@ -127,6 +127,21 @@ public class ResourceContainer {
 		return new TreeMap<String, Resource>(RESOURCES);
 	}
 	
+	/** Returns a String with all the symbols of resources and the prices separated by two spaces */
+	public String ticker() {
+		StringBuilder output = new StringBuilder();
+		for (String symbol: amounts.keySet()) {
+			output.append(symbol);
+			output.append(": ");
+			output.append(" $");
+			output.append(String.format("%.2f", RESOURCES.get(symbol).getPrice()));
+			output.append("/");
+			output.append(amounts.get(symbol));
+			output.append(" units ");
+		}
+		return output.toString();
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder output = new StringBuilder();
