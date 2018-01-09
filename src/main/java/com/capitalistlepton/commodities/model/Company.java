@@ -32,23 +32,23 @@ public class Company {
 	/**
 	 * Adds the number of specified resources to the inventory
 	 * 
-	 * @param r Resource to add to the inventory
+	 * @param symbol String symbol of Resource to add to the inventory
 	 * @param amount positive integer amount of the resource being added
 	 * @throws IllegalArgumentException if amount < 0
 	 */
-	public void addResource(Resource r, int amount) {
-		inventory.addResource(r, amount);
+	public void addResource(String symbol, int amount) {
+		inventory.addResource(symbol, amount);
 	}
 	
 	/**
 	 * Removes the number of specified resources to the inventory
 	 * 
-	 * @param r Resource to remove from the inventory
+	 * @param symbol String symbol of Resource to remove from the inventory
 	 * @param amount positive integer amount of the resource being removed
 	 * @throws IllegalArgumentException if amount < 0
 	 */
-	public void removeResource(Resource r, int amount) {
-		inventory.removeResource(r, amount);
+	public void removeResource(String symbol, int amount) {
+		inventory.removeResource(symbol, amount);
 	}
 	
 	/**

@@ -6,15 +6,15 @@ public abstract class MarketAction {
 		@Override
 		public boolean validator(Company co, Market m, String symbol, int amount) {
 			return (amount >= 0 && amount <= m.getAmount(symbol) 
-					&& co.getBalance() >= amount * m.getResource(symbol).getPrice());
+					&& co.getBalance() >= amount * ResourceContainer.getResource(symbol).getPrice());
 		}
 
 		@Override
 		public boolean perform(Company co, Market m, String symbol, int amount) {
-			Resource r = m.getResource(symbol);
+			Resource r = ResourceContainer.getResource(symbol);
 			if (validator(co, m, symbol, amount)) {
 				try {
-					co.addResource(r, amount);
+					co.addResource(symbol, amount);
 					co.changeBalance(-1 * amount * r.getPrice());
 					m.removeResource(symbol, amount);
 					return true;
@@ -36,10 +36,10 @@ public abstract class MarketAction {
 
 		@Override
 		public boolean perform(Company co, Market m, String symbol, int amount) {
-			Resource r = m.getResource(symbol);
+			Resource r = ResourceContainer.getResource(symbol);
 			if (validator(co, m, symbol, amount)) {
 				try {
-					co.removeResource(r, amount);
+					co.removeResource(symbol, amount);
 					co.changeBalance(amount * r.getPrice());
 					m.addResource(symbol, amount);
 					return true;

@@ -7,6 +7,13 @@ public class ResourceContainer {
 	
 	/** Map of all the resources and their respective symbols. */
 	private static final SortedMap<String, Resource> RESOURCES = new TreeMap<String, Resource>();
+	static {
+		if (RESOURCES.isEmpty()) {
+			RESOURCES.put("LUM", new Resource("Lumber", "LUM", 1.0));
+			RESOURCES.put("IRO", new Resource("Iron", "IRO", 10.0));
+			RESOURCES.put("STO", new Resource("Stone", "STO", 1.0));
+		}
+	}
 	/** Maps the symbol of all the resources to their stored amount. */
 	private SortedMap<String, Integer> amounts;
 	
@@ -20,11 +27,7 @@ public class ResourceContainer {
 	 * @param defaultAmount int amount of each resource in the initial container.
 	 */
 	public ResourceContainer(int defaultAmount) {
-		if (RESOURCES.isEmpty()) {
-			RESOURCES.put("LUM", new Resource("Lumber", "LUM", 1.0));
-			RESOURCES.put("IRO", new Resource("Iron", "IRO", 10.0));
-			RESOURCES.put("STO", new Resource("Stone", "STO", 1.0));
-		}
+		
 		amounts = new TreeMap<String, Integer>();
 		for (String symbol: RESOURCES.keySet()) {
 			amounts.put(symbol, defaultAmount);
@@ -80,7 +83,7 @@ public class ResourceContainer {
 	 * @param symbol String symbol of Resource to lookup.
 	 * @return Resource object.
 	 */
-	public Resource getResource(String symbol) {
+	public static Resource getResource(String symbol) {
 		return RESOURCES.get(symbol);
 	}
 	

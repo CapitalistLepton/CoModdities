@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class CompanyTest {
 	
-	private static final Resource LUMBER = new Resource("Lumber", "LUM", 5.0);
+	private static final String LUMBER = "LUM";
 	
 	private Company co1;
 	private Company co2;
@@ -39,7 +39,7 @@ public class CompanyTest {
 			fail("Exception not thrown");
 		} catch (IllegalArgumentException e) {}
 		co1.addResource(LUMBER, 45);
-		assertEquals(45, co1.getAmount(LUMBER.getSym()));
+		assertEquals(45, co1.getAmount(LUMBER));
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class CompanyTest {
 			fail("Exception not thrown");
 		} catch (IllegalArgumentException e) {}
 		co2.removeResource(LUMBER, 45);
-		assertEquals(0, co2.getAmount(LUMBER.getSym()));
+		assertEquals(0, co2.getAmount(LUMBER));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -60,6 +60,6 @@ public class CompanyTest {
 
 	@Test
 	public void testAmountOf() {
-		assertEquals(0, co3.getAmount(LUMBER.getSym()));
+		assertEquals(0, co3.getAmount(LUMBER));
 	}
 }
