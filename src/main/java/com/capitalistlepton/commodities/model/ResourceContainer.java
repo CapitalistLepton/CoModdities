@@ -105,5 +105,17 @@ public class ResourceContainer {
 					" is not in the inventory");
 		}
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder();
+		for (String symbol: amounts.keySet()) {
+			output.append(symbol);
+			output.append(": ");
+			output.append(amounts.get(symbol));
+			output.append(" units ");
+		}
+		return output.toString();
+	}
 
 }

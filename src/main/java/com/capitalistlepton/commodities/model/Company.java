@@ -1,21 +1,18 @@
 package com.capitalistlepton.commodities.model;
 
-import java.util.SortedMap;
-import java.util.TreeMap;
-
 public class Company {
 
-	/** The name of the company */
+	/** The name of the company. */
 	private String name;
-	/** How much money the company has */
+	/** How much money the company has. */
 	private double balance;
-	/** SortedMap of how many of each resource the company currently owns */
-	private SortedMap<Resource, Integer> inventory;
+	/** Inventory of all the current resources in the company. */
+	private ResourceContainer inventory;
 	
 	public Company(String name, double balance) {
 		this.name = name;
 		this.balance = balance;
-		this.inventory = new TreeMap<Resource, Integer>();
+		this.inventory = new ResourceContainer();
 	}
 	
 	public double getBalance() {
@@ -39,15 +36,8 @@ public class Company {
 	 * @param amount positive integer amount of the resource being added
 	 * @throws IllegalArgumentException if amount < 0
 	 */
-	public void addResource(Resource r, int amount) throws IllegalArgumentException {
-		if (amount < 0) {
-			throw new IllegalArgumentException("Amount must be >= 0");
-		}
-		if (inventory.containsKey(r)) {
-			inventory.put(r, inventory.get(r) + amount);
-		} else {
-			inventory.put(r, amount);
-		}
+	public void addResource(Resource r, int amount) {
+		inventory.addResource(r, amount);
 	}
 	
 	/**
@@ -57,20 +47,8 @@ public class Company {
 	 * @param amount positive integer amount of the resource being removed
 	 * @throws IllegalArgumentException if amount < 0
 	 */
-	public void removeResource(Resource r, int amount) throws IllegalArgumentException {
-		if (amount < 0) {
-			throw new IllegalArgumentException("Amount must be >= 0");
-		}
-		if (inventory.containsKey(r)) {
-			if (inventory.get(r) >= amount) {
-				inventory.put(r, inventory.get(r) - amount);
-			} else {
-				throw new IllegalArgumentException("Not enough resources to sell");
-			}
-		} else {
-			throw new IllegalArgumentException("Resource " + r.getName() + 
-					" is not in the company's inventory");
-		}
+	public void removeResource(Resource r, int amount) {
+		inventory.removeResource(r, amount);
 	}
 	
 	/**
@@ -81,11 +59,7 @@ public class Company {
 	 * @return amount of Resources
 	 */
 	public int amountOf(Resource r) {
-		if (inventory.containsKey(r)) {
-			return inventory.get(r);
-		} else {
-			return 0;
-		}
+		return inventory.getAmount(r.getSym());
 	}
 	
 	/** Returns a String representation of the company and its assets */
@@ -96,12 +70,7 @@ public class Company {
 		stats.append(String.format("%.2f", balance));
 		stats.append("\n");
 		stats.append("Inv: ");
-		for (Resource r: inventory.keySet()) {
-			stats.append(r.getName());
-			stats.append(": ");
-			stats.append(inventory.get(r));
-			stats.append(" units ");
-		}
+		stats.append(inventory);
 		return stats.toString();
 	}
 }
