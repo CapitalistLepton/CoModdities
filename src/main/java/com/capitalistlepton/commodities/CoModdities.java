@@ -8,10 +8,8 @@ import com.capitalistlepton.commodities.model.Market.Action;
 
 public class CoModdities {
 	
-	private static Market m;
-
 	public static void main(String[] args) {
-		m = new Market();
+		Market m = new Market();
 		System.out.println(m.ticker());
 		Company co = new Company("Cobalt Corportaion, Inc.", 500.0);
 		Scanner in = new Scanner(System.in);
@@ -28,9 +26,9 @@ public class CoModdities {
 				choice = in.next();
 			}
 			if (choice.equalsIgnoreCase("b")) {
-				performAction(in, Market.BUY, m, co, getSymbol(in));
+				performAction(in, Market.BUY, m, co, getSymbol(m, in));
 			} else if (choice.equalsIgnoreCase("s")) {
-				performAction(in, Market.SELL, m, co, getSymbol(in));
+				performAction(in, Market.SELL, m, co, getSymbol(m, in));
 			}
 		}
 		in.close();
@@ -42,7 +40,7 @@ public class CoModdities {
 	 * @param in Scanner of the user's input
 	 * @return String symbol to use
 	 */
-	private static String getSymbol(Scanner in) {
+	private static String getSymbol(Market m, Scanner in) {
 		String symbol = null;
 		while(!m.contains(symbol)) {
 			System.out.print("Symbol? ");
