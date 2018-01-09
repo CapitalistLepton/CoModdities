@@ -34,33 +34,33 @@ public class MarketTest {
 		assertFalse(m1.contains("BLA"));
 	}
 	
-	@Test
-	public void testBuyProper() {
-		assertTrue(Market.BUY.action(m1, co1, "LUM", 20) && co1.getBalance() == 480);
-	}
-	
-	@Test
-	public void testBuyLowFunds() {
-		assertFalse(Market.BUY.action(m1, co3, "IRO", 10));
-	}
-	
-	@Test
-	public void testBuyTooMany() {
-		assertFalse(Market.BUY.action(m1, co1, "LUM", 200));
-	}
-	
-	@Test
-	public void testSellProper() {
-		assertTrue(Market.SELL.action(m1, co4, "STO", 45) && co4.getBalance() == 46);
-	}
-	
-	@Test
-	public void testSellNoRes() {
-		assertFalse(Market.SELL.action(m1, co2, "LUM", 30));
-	}
-	
-	@Test
-	public void testSellTooFew() {
-		assertFalse(Market.SELL.action(m1, co4, "STO", 90));
-	}
+//	@Test
+//	public void testBuyProper() {
+//		assertTrue(Market.BUY.action(m1, co1, "LUM", 20) && co1.getBalance() == 480);
+//	}
+//	
+//	@Test
+//	public void testBuyLowFunds() {
+//		assertFalse(Market.BUY.action(m1, co3, "IRO", 10));
+//	}
+//	
+//	@Test
+//	public void testBuyTooMany() {
+//		assertFalse(Market.BUY.action(m1, co1, "LUM", 200));
+//	}
+//	
+//	@Test
+//	public void testSellProper() {
+//		assertTrue(Market.SELL.action(m1, co4, "STO", 45) && co4.getBalance() == 46);
+//	}
+//	
+//	@Test
+//	public void testSellNoRes() {
+//		assertFalse(Market.SELL.action(m1, co2, "LUM", 30));
+//	}
+//	
+//	@Test
+//	public void testSellTooFew() {
+//		assertFalse(Market.SELL.action(m1, co4, "STO", 90));
+//	}
 }

@@ -1,36 +1,27 @@
 package com.capitalistlepton.commodities.model;
 
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-public class Market {
+public class Market extends ResourceContainer {
 	
-	/** Map of all possible resources on the market and their respective symbols. */
-	private SortedMap<String, Resource> resources;
-	/** Maps the symbol of all possible resources to the amount available in the market. */
-	private SortedMap<String, Integer> amounts;
+//	/** Inventory containing all resources in the market. */
+//	private ResourceContainer inventory;
+	
+	private static final int STARTING_AMOUNTS = 40;
 	
 	public Market() {
-		resources = new TreeMap<String, Resource>();
-		resources.put("LUM", new Resource("Lumber", "LUM", 1.0));
-		resources.put("IRO", new Resource("Iron", "IRO", 10.0));
-		resources.put("STO", new Resource("Stone", "STO", 1.0));
-		amounts = new TreeMap<String, Integer>();
-		for (String s: resources.keySet()) {
-			amounts.put(s, 50);
-		}
+		super(STARTING_AMOUNTS);
+//		inventory = new ResourceContainer();
 	}
 	
 	/** Returns a String with all the symbols of resources and the prices separated by two spaces */
 	public String ticker() {
-		StringBuilder output = new StringBuilder();
-		for (Resource r: resources.values()) {
-			output.append(r);
-			output.append(" ");
-			output.append(amounts.get(r.getSym()));
-			output.append("u  ");
-		}
-		return output.toString();
+//		StringBuilder output = new StringBuilder();
+//		for (Resource r: resources.values()) {
+//			output.append(r);
+//			output.append(" ");
+//			output.append(amounts.get(r.getSym()));
+//			output.append("u  ");
+//		}
+		return super.toString();
 	}
 
 	/** 
@@ -40,52 +31,74 @@ public class Market {
 	 * @return boolean value of whether the symbol is traded on this market
 	 */
 	public boolean contains(String symbol) {
-		if (symbol == null) {
+		if (symbol != null) {
+			return ResourceContainer.allResources().containsKey(symbol);
+		} else {
 			return false;
 		}
-		return resources.containsKey(symbol);
 	}
+		
+//	/**
+//	 * Buys the specified amount of the resource for Company co.
+//	 * 
+//	 * @param co Company which is buying.
+//	 * @param symbol String symbol of resource to buy.
+//	 * @param amount int amount bought.
+//	 * @return boolean value of whether or not the transaction succeeded.
+//	 */
+//	public boolean buy(Company co, String symbol, int amount) {
+//		Resource r = inventory.getResource(symbol);
+//		if (buyValidator(co, symbol, amount)) {
+//			try {
+//				co.addResource(r, amount);
+//				co.changeBalance(-1 * amount * r.getPrice());
+//				inventory.removeResource(symbol, amount);
+//				return true;
+//			} catch (IllegalArgumentException e) {
+//				System.out.println(e.getMessage());
+//				return false;
+//			}
+//		} else {
+//			return false;
+//		}
+//	}
 	
-	/** Interface for all actions that companies can perform on the market */
-	public interface Action {
-		public boolean action(Market m, Company co, String sym, int amount);
-	}
+//	/**
+//	 * Checks whether the company can buy the specified amount of the resource.
+//	 * 
+//	 * @param co Company which is buying.
+//	 * @param symbol String symbol of resource to buy.
+//	 * @param amount int amount bought.
+//	 * @return boolean value of whether or not the transaction is valid.
+//	 */
+//	public boolean buyValidator(Company co, String symbol, int amount) {
+//		return (amount >= 0 && amount <= inventory.getAmount(symbol) 
+//				&& co.getBalance() >= amount * inventory.getResource(symbol).getPrice());
+//	}
 	
-	/** Action to buy a resource */
-	public static final Action BUY = new Action() {
-		public boolean action(Market m, Company co, String sym, int amount) {
-			if (amount <= m.amounts.get(sym) && co.getBalance() >= amount * m.resources.get(sym).getPrice()) {
-				try {
-					co.addResource(m.resources.get(sym), amount);
-					co.changeBalance(-1 * amount * m.resources.get(sym).getPrice());
-					m.amounts.put(sym, m.amounts.get(sym) - amount);
-					return true;
-				} catch (IllegalArgumentException e) {
-					System.out.println(e.getMessage());
-					return false;
-				}
-			} else {
-				return false;
-			}
-		}
-	};
-
-	/** Action to buy a resource */
-	public static final Action SELL = new Action() {
-		public boolean action(Market m, Company co, String sym, int amount) {
-			if (co.amountOf(m.resources.get(sym)) >= amount) {
-				try {
-					co.removeResource(m.resources.get(sym), amount);
-					co.changeBalance(amount * m.resources.get(sym).getPrice());
-					m.amounts.put(sym, m.amounts.get(sym) + amount);
-					return true;
-				} catch (IllegalArgumentException e) {
-					System.out.println(e.getMessage());
-					return false;
-				}
-			} else {
-				return false;
-			}
-		}
-	};
+//	/**
+//	 * Sells the specified amount of the resource from Company co.
+//	 * 
+//	 * @param co Company which is selling.
+//	 * @param symbol String symbol of resource to sell.
+//	 * @param amount int amount sold.
+//	 * @return boolean value of whether or not the transaction succeeded.
+//	 */
+//	public boolean sell(Company co, String symbol, int amount) {
+//		int currentAmount = inventory.getAmount(symbol);
+//		Resource r = inventory.getResource(symbol);
+//		if (currentAmount >= amount) {
+//			try {
+//				co.removeResource(r, amount);
+//				co.changeBalance(amount * r.getPrice());
+//				inventory.addResource(r, amount);
+//				return true;
+//			} catch (IllegalArgumentException e) {
+//				System.out.println(e.getMessage());
+//				return false;
+//			}
+//		} else {
+//			return false;
+//		}
+//	}
 }

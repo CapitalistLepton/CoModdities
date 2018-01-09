@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.capitalistlepton.commodities.model.Company;
 import com.capitalistlepton.commodities.model.Market;
-import com.capitalistlepton.commodities.model.Market.Action;
+import com.capitalistlepton.commodities.model.MarketAction;
 
 public class CoModdities {
 	
@@ -26,9 +26,9 @@ public class CoModdities {
 				choice = in.next();
 			}
 			if (choice.equalsIgnoreCase("b")) {
-				performAction(in, Market.BUY, m, co, getSymbol(m, in));
+				performAction(in, MarketAction.BUY, m, co, getSymbol(m, in));
 			} else if (choice.equalsIgnoreCase("s")) {
-				performAction(in, Market.SELL, m, co, getSymbol(m, in));
+				performAction(in, MarketAction.SELL, m, co, getSymbol(m, in));
 			}
 		}
 		in.close();
@@ -58,14 +58,15 @@ public class CoModdities {
 	 * @param co Company to use
 	 * @param symbol String symbol to use
 	 */
-	private static void performAction(Scanner in, Action a, Market m, Company co, String symbol) {
+	private static void performAction(Scanner in, MarketAction a, Market m, Company co, String symbol) {
 		System.out.print("Amount? ");
-		int amt = in.nextInt();
+		int amount = in.nextInt();
 		in.nextLine(); // read in new line
-		while (amt < 0  || !a.action(m, co, symbol, amt)) {
+		while (!a.validator(co, m, symbol, amount) || !a.perform(co, m, symbol, amount)) {
 			System.out.print("Amount? ");
-			amt = in.nextInt();
+			amount = in.nextInt();
 			in.nextLine(); // read in new line
 		}
+		
 	}
 }

@@ -11,12 +11,24 @@ public class ResourceContainer {
 	private SortedMap<String, Integer> amounts;
 	
 	public ResourceContainer() {
+		this(0);
+	}
+	
+	/**
+	 * Creates a new container with defaultAmount of each resource possible.
+	 * 
+	 * @param defaultAmount int amount of each resource in the initial container.
+	 */
+	public ResourceContainer(int defaultAmount) {
 		if (RESOURCES.isEmpty()) {
 			RESOURCES.put("LUM", new Resource("Lumber", "LUM", 1.0));
 			RESOURCES.put("IRO", new Resource("Iron", "IRO", 10.0));
 			RESOURCES.put("STO", new Resource("Stone", "STO", 1.0));
 		}
 		amounts = new TreeMap<String, Integer>();
+		for (String symbol: RESOURCES.keySet()) {
+			amounts.put(symbol, defaultAmount);
+		}
 	}
 	
 	/**
@@ -104,6 +116,15 @@ public class ResourceContainer {
 			throw new IllegalArgumentException("Resource " + symbol + 
 					" is not in the inventory");
 		}
+	}
+	
+	/**
+	 * Copy of all the possible resources.
+	 * 
+	 * @return SortedMap<String, Resource> of all the possible resources and their symbols.
+	 */
+	public static SortedMap<String, Resource> allResources() {
+		return new TreeMap<String, Resource>(RESOURCES);
 	}
 	
 	@Override
