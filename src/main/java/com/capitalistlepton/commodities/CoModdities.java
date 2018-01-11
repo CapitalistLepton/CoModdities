@@ -62,11 +62,15 @@ public class CoModdities {
 		System.out.print("Amount? ");
 		int amount = in.nextInt();
 		in.nextLine(); // read in new line
-		while (!a.validator(co, m, symbol, amount) || !a.perform(co, m, symbol, amount)) {
+		while (!a.validator(co, m, symbol, amount)) {
 			System.out.print("Amount? ");
 			amount = in.nextInt();
 			in.nextLine(); // read in new line
 		}
-		
+		try {
+			a.perform(co, m, symbol, amount);
+		} catch(IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }

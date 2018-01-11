@@ -12,6 +12,7 @@ public class ResourceContainer {
 			RESOURCES.put("LUM", new Resource("Lumber", "LUM", 1.0));
 			RESOURCES.put("IRO", new Resource("Iron", "IRO", 10.0));
 			RESOURCES.put("STO", new Resource("Stone", "STO", 1.0));
+			RESOURCES.put("STL", new Resource("Steel", "STL", 30.0));
 		}
 	}
 	/** Maps the symbol of all the resources to their stored amount. */
@@ -40,7 +41,7 @@ public class ResourceContainer {
 	 * @param symbol String symbol of the Resource to search for.
 	 * @return int amount of how many units are stored.
 	 */
-	public int getAmount(String symbol) {
+	public int amountOf(String symbol) {
 		if (!amounts.containsKey(symbol)) {
 			return 0;
 		} else {
@@ -122,6 +123,16 @@ public class ResourceContainer {
 	}
 	
 	/**
+	 * Returns a copy of the amounts map. This is all the symbols of resources 
+	 * paired with their amounts.
+	 * 
+	 * @return a SortedMap with all the symbols of resources paired with their amounts.
+	 */
+	public SortedMap<String, Integer> currentAmounts() {
+		return new TreeMap<String, Integer>(amounts);
+	}
+	
+	/**
 	 * Copy of all the possible resources.
 	 * 
 	 * @return SortedMap<String, Resource> of all the possible resources and their symbols.
@@ -152,7 +163,7 @@ public class ResourceContainer {
 			output.append(symbol);
 			output.append(": ");
 			output.append(amounts.get(symbol));
-			output.append(" units ");
+			output.append(" unit(s) ");
 		}
 		return output.toString();
 	}

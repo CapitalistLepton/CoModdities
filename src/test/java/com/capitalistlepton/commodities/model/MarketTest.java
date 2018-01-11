@@ -38,33 +38,33 @@ public class MarketTest {
 	
 	@Test
 	public void testBuyProper() {
-		assertTrue(MarketAction.BUY.perform(co1, m1, "LUM", 20));
+		MarketAction.BUY.perform(co1, m1, "LUM", 20);
 		assertEquals(480, co1.getBalance(), THRESHOLD);
 	}
 	
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testBuyLowFunds() {
-		assertFalse(MarketAction.BUY.perform(co3, m1, "IRO", 10));
+		MarketAction.BUY.perform(co3, m1, "IRO", 10);
 	}
 	
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testBuyTooMany() {
-		assertFalse(MarketAction.BUY.perform(co1, m1, "LUM", 200));
+		MarketAction.BUY.perform(co1, m1, "LUM", 200);
 	}
 	
 	@Test
 	public void testSellProper() {
-		assertTrue(MarketAction.SELL.perform(co4, m1, "STO", 45));
+		MarketAction.SELL.perform(co4, m1, "STO", 45);
 		assertEquals(46, co4.getBalance(), THRESHOLD);
 	}
 	
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testSellNoRes() {
-		assertFalse(MarketAction.SELL.perform(co2, m1, "LUM", 30));
+		MarketAction.SELL.perform(co2, m1, "LUM", 30);
 	}
 	
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testSellTooFew() {
-		assertFalse(MarketAction.SELL.perform(co4, m1, "STO", 90));
+		MarketAction.SELL.perform(co4, m1, "STO", 90);
 	}
 }
