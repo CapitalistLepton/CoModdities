@@ -7,13 +7,15 @@ import org.junit.Test;
 
 public class ResourceTest {
 	
+	private static final double THRESHOLD = 0.000001;
+	
 	private Resource lum;
 	private Resource sto;
 	private Resource iro;
 	private Resource lumFake;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		lum = new Resource("Lumber", "LUM", 5);
 		sto = new Resource("Stone", "STO", 1);
 		iro = new Resource("Iron", "IRO", 1);
@@ -47,13 +49,13 @@ public class ResourceTest {
 
 	@Test
 	public void testGetPrice() {
-		assertEquals(5, lum.getPrice(), 0.01);
+		assertEquals(5, lum.getPrice(), THRESHOLD);
 	}
 
 	@Test
 	public void testSetPriceProper() {
 		sto.setPrice(5);
-		assertEquals(5, sto.getPrice(), 0.01);
+		assertEquals(5, sto.getPrice(), THRESHOLD);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -65,7 +67,7 @@ public class ResourceTest {
 	public void testChangePriceProper() {
 		sto.setPrice(0.01);
 		sto.changePrice(1.99);
-		assertEquals(2, sto.getPrice(), 0.01);
+		assertEquals(2, sto.getPrice(), THRESHOLD);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -81,17 +83,19 @@ public class ResourceTest {
 
 	@Test
 	public void testGreaterThan() {
-		assertTrue(sto.compareTo(lum) > 0 && lum.compareTo(iro) > 0);
+		assertTrue(sto.compareTo(lum) > 0);
+		assertTrue(lum.compareTo(iro) > 0);
 	}
 	
 	@Test
 	public void testLessThan() {
-		assertTrue(lum.compareTo(sto) < 0 && iro.compareTo(lum) < 0);
+		assertTrue(lum.compareTo(sto) < 0);
+		assertTrue(iro.compareTo(lum) < 0);
 	}
 	
 	@Test
 	public void testEqualTo() {
-		assertTrue(lum.compareTo(lumFake) == 0);
+		assertEquals(0, lum.compareTo(lumFake));
 	}
 
 }

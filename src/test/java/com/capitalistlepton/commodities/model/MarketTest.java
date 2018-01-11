@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class MarketTest {
+	
+	private static final double THRESHOLD = 0.000001;
 
 	private Market m1;
 	private Company co1;
@@ -15,7 +17,7 @@ public class MarketTest {
 	
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		m1 = new Market();
 		co1 = new Company("Test 1", 500);
 		co2 = new Company("Test 2", 500);
@@ -36,7 +38,8 @@ public class MarketTest {
 	
 	@Test
 	public void testBuyProper() {
-		assertTrue(MarketAction.BUY.perform(co1, m1, "LUM", 20) && co1.getBalance() == 480);
+		assertTrue(MarketAction.BUY.perform(co1, m1, "LUM", 20));
+		assertEquals(480, co1.getBalance(), THRESHOLD);
 	}
 	
 	@Test
@@ -51,7 +54,8 @@ public class MarketTest {
 	
 	@Test
 	public void testSellProper() {
-		assertTrue(MarketAction.SELL.perform(co4, m1, "STO", 45) && co4.getBalance() == 46);
+		assertTrue(MarketAction.SELL.perform(co4, m1, "STO", 45));
+		assertEquals(46, co4.getBalance(), THRESHOLD);
 	}
 	
 	@Test
