@@ -6,14 +6,25 @@ import java.util.SortedMap;
 public final class Recipe {
 	
 	private static ResourceContainer steelRequirements;
+	private static ResourceContainer pigIronRequirements;
+	private static ResourceContainer charcoalRequirements;
 	
 	static {
 		steelRequirements = new ResourceContainer();
-		steelRequirements.addResource("LUM", 1);
+		steelRequirements.addResource("COA", 1);
 		steelRequirements.addResource("IRO", 3);
+		
+		pigIronRequirements = new ResourceContainer();
+		pigIronRequirements.addResource("CHA", 2);
+		pigIronRequirements.addResource("IRO", 3);
+		
+		charcoalRequirements = new ResourceContainer();
+		charcoalRequirements.addResource("LUM", 2);
 	}
 	
 	public static final Recipe STEEL = new Recipe(steelRequirements, ResourceContainer.getResource("STL"), 2);
+	public static final Recipe PIG_IRON = new Recipe(steelRequirements, ResourceContainer.getResource("PIG"), 1);
+	public static final Recipe CHARCOAL = new Recipe(steelRequirements, ResourceContainer.getResource("CHA"), 1);
 	
 	private final ResourceContainer requirements;
 	private final Resource output;

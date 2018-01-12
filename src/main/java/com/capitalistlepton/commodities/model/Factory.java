@@ -1,5 +1,6 @@
 package com.capitalistlepton.commodities.model;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,10 @@ public class Factory extends ResourceContainer {
 	
 	private final List<Recipe> recipes;
 	private final String name;
+	
+	public static final Factory STEEL_FACTORY = new Factory("Steel Factory", Arrays.asList(Recipe.STEEL));
+	public static final Factory PIG_IRON_FACTORY = new Factory("Pig Iron Refinery", Arrays.asList(Recipe.PIG_IRON));
+	public static final Factory CHARCOAL_FACTORY = new Factory("Charcoal Manufactory", Arrays.asList(Recipe.CHARCOAL));
 
 	/**
 	 * Creates a new Factory with the given list of recipes.

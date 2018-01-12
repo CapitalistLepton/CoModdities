@@ -13,6 +13,9 @@ public class ResourceContainer {
 			RESOURCES.put("IRO", new Resource("Iron", "IRO", 10.0));
 			RESOURCES.put("STO", new Resource("Stone", "STO", 1.0));
 			RESOURCES.put("STL", new Resource("Steel", "STL", 30.0));
+			RESOURCES.put("COA", new Resource("Coal", "COA", 15.0));
+			RESOURCES.put("CHA", new Resource("Charcoal", "CHA", 8.0));
+			RESOURCES.put("PIG", new Resource("Pig Iron", "PIG", 25.0));
 		}
 	}
 	/** Maps the symbol of all the resources to their stored amount. */
