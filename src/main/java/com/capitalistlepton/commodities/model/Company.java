@@ -1,19 +1,50 @@
 package com.capitalistlepton.commodities.model;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 public class Company extends ResourceContainer {
 
 	/** The name of the company. */
 	private String name;
 	/** How much money the company has. */
 	private double balance;
+	/** All factories owned by this company. */
+	private Set<Factory> factories;
 	
 	public Company(String name, double balance) {
 		this.name = name;
 		this.balance = balance;
+		this.factories = new HashSet<Factory>();
 	}
 	
+	/**
+	 * Returns the current balance of this Company.
+	 * 
+	 * @return the current balance of this Company.
+	 */
 	public double getBalance() {
 		return balance;
+	}
+	
+	/**
+	 * Returns the Set of all Factories currently owned by this Company.
+	 * 
+	 * @return the Set of all Factories currently owned by this Company.
+	 */
+	public Set<Factory> getFactories() {
+		return factories;
+	}
+	
+	/**
+	 * Adds the given Factory to the Company.
+	 * 
+	 * @param f Factory to add to the Company.
+	 * @throws NullPointerException if f is null.
+	 */
+	public void addFactory(Factory f) {
+		factories.add(Objects.requireNonNull(f));
 	}
 	
 	/**

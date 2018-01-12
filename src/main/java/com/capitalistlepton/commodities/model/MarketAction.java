@@ -11,8 +11,8 @@ public abstract class MarketAction {
 		 * @param m Market to buy from.
 		 * @param symbol String symbol of Resource to buy.
 		 * @param amount int amount of Resource being bought.
-		 * @throws IllegalArgumentException if amount &lt; 0 or amount &gt; co.amountOf(symbol)
-		 * or if co.getBalance is too low.
+		 * @return whether or not the parameters are valid (if amount &lt; 0 or amount &gt; 
+		 * co.amountOf(symbol) or if co.getBalance is too low).
 		 */
 		@Override
 		public boolean validator(Company co, Market m, String symbol, int amount) {
@@ -47,7 +47,7 @@ public abstract class MarketAction {
 		 * @param m Market to sell to.
 		 * @param symbol String symbol of Resource to sell.
 		 * @param amount int amount of Resource being sold.
-		 * @throws IllegalArgumentException if amount &lt; 0 or amount &gt; m.amountOf(symbol)
+		 * @return whether or not the parameters are valid (if amount &lt; 0 or amount &gt; m.amountOf(symbol)).
 		 */
 		@Override
 		public boolean validator(Company co, Market m, String symbol, int amount) {
@@ -61,7 +61,7 @@ public abstract class MarketAction {
 		 * @param m Market to sell to.
 		 * @param symbol String symbol of Resource to sell.
 		 * @param amount int amount of Resource being sold.
-		 * @throws IllegalArgumentException if amount &lt; 0 or amount &gt; m.amountOf(symbol)
+		 * @throws IllegalArgumentException if amount &lt; 0 or amount &gt; m.amountOf(symbol).
 		 */
 		@Override
 		public void perform(Company co, Market m, String symbol, int amount) {

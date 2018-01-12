@@ -63,4 +63,23 @@ public class Factory extends ResourceContainer {
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * <p>
+	 * <br>
+	 * Two Factories are equal when they have the same recipe list and name.
+	 * </p>
+	 */
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		} else if (other == null || other.getClass() != this.getClass()) {
+			return false;
+		} else {
+			Factory f = (Factory) other;
+			return recipes.equals(f.recipes) && name.equals(f.name) ;
+		}
+	}
+	
 }

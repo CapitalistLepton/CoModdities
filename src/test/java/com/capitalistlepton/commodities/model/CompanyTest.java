@@ -2,6 +2,10 @@ package com.capitalistlepton.commodities.model;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,12 +13,16 @@ public class CompanyTest {
 	
 	private static final String LUMBER = "LUM";
 	private static final double THRESHOLD = 0.000001;
+	private static final Factory STEEL_FACTORY = new Factory("Steel Factory", Arrays.asList(Recipe.STEEL));
 	
 	private Company co1;
+	private Company co2;
 
 	@Before
 	public void setUp() {
 		co1 = new Company("Test 1", 500);
+		co2 = new Company("Test 2", 500);
+		co2.addFactory(STEEL_FACTORY);
 	}
 
 	@Test
@@ -72,5 +80,22 @@ public class CompanyTest {
 	@Test
 	public void testAmountOf() {
 		assertEquals(0, co1.amountOf(LUMBER));
+	}
+	
+	@Test
+	public void testGetFactories() {
+		Set<Factory> f = new HashSet<Factory>();
+		f.add(STEEL_FACTORY);
+		assertEquals(f, co2.getFactories());
+	}
+	
+	@Test
+	public void testGetFactoriesEmpty() {
+		assertEquals(new HashSet<Factory>(), co1.getFactories());
+	}
+	
+	@Test
+	public void testStats() {
+		assertEquals("Test 1: $500.00\nInv: IRO: 0 unit(s) LUM: 0 unit(s) STL: 0 unit(s) STO: 0 unit(s) ", co1.stats());
 	}
 }

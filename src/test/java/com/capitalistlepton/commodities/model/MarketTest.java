@@ -37,6 +37,11 @@ public class MarketTest {
 	}
 	
 	@Test
+	public void testContainsNull() {
+		assertFalse(m1.contains(null));
+	}
+	
+	@Test
 	public void testBuyProper() {
 		MarketAction.BUY.perform(co1, m1, "LUM", 20);
 		assertEquals(480, co1.getBalance(), THRESHOLD);
@@ -53,6 +58,26 @@ public class MarketTest {
 	}
 	
 	@Test
+	public void testBuyValid() {
+		assertTrue(MarketAction.BUY.validator(co1, m1, "LUM", 20));
+	}
+	
+	@Test
+	public void testBuyNegativeAmount() {
+		assertFalse(MarketAction.BUY.validator(co1, m1, "LUM", -1));
+	}
+	
+	@Test
+	public void testBuyTooMuch() {
+		assertFalse(MarketAction.BUY.validator(co3, m1, "IRO", 10));
+	}
+	
+	@Test
+	public void testBuyTooLittleMarket() {
+		assertFalse(MarketAction.BUY.validator(co1, m1, "LUM", 200));
+	}
+	
+	@Test
 	public void testSellProper() {
 		MarketAction.SELL.perform(co4, m1, "STO", 45);
 		assertEquals(46, co4.getBalance(), THRESHOLD);
@@ -66,5 +91,20 @@ public class MarketTest {
 	@Test (expected = IllegalArgumentException.class)
 	public void testSellTooFew() {
 		MarketAction.SELL.perform(co4, m1, "STO", 90);
+	}
+	
+	@Test
+	public void testSellValid() {
+		assertTrue(MarketAction.SELL.validator(co4, m1, "STO", 45));
+	}
+	
+	@Test
+	public void testSellTooLittle() {
+		assertFalse(MarketAction.SELL.validator(co4, m1, "STO", -1));
+	}
+	
+	@Test
+	public void testSellTooMany() {
+		assertFalse(MarketAction.SELL.validator(co4, m1, "STO", 450));
 	}
 }
