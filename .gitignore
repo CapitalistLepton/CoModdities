@@ -11,3 +11,5 @@ build/
 .settings/
 
 *.db
+
+.DS_Store
