@@ -13,3 +13,7 @@ build/
 *.db
 
 .DS_Store
+
+.pmd
+.checkstyle
+.ruleset
