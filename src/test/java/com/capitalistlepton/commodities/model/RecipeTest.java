@@ -25,7 +25,7 @@ public class RecipeTest {
 		co1.addResource("STO", 30);
 		
 		co2 = new Company("Test 2", 500);
-		co2.addResource("LUM", 30);
+		co2.addResource("COA", 30);
 		co2.addResource("IRO", 30);
 	}
 
@@ -67,7 +67,7 @@ public class RecipeTest {
 	 */
 	@Test
 	public void testRequirements() {
-		assertEquals("IRO: 3 unit(s) LUM: 1 unit(s) STL: 0 unit(s) STO: 0 unit(s) ", 
+		assertEquals("CHA: 0 unit(s) COA: 1 unit(s) IRO: 3 unit(s) LUM: 0 unit(s) PIG: 0 unit(s) STL: 0 unit(s) STO: 0 unit(s) ", 
 				Recipe.STEEL.requirements());
 	}
 

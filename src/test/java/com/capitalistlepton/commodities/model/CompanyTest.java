@@ -96,6 +96,6 @@ public class CompanyTest {
 	
 	@Test
 	public void testStats() {
-		assertEquals("Test 1: $500.00\nInv: IRO: 0 unit(s) LUM: 0 unit(s) STL: 0 unit(s) STO: 0 unit(s) ", co1.stats());
+		assertEquals("Test 1: $500.00\nInv: CHA: 0 unit(s) COA: 0 unit(s) IRO: 0 unit(s) LUM: 0 unit(s) PIG: 0 unit(s) STL: 0 unit(s) STO: 0 unit(s) ", co1.stats());
 	}
 }

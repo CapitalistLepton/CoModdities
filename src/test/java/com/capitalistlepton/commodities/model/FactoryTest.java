@@ -69,7 +69,7 @@ public class FactoryTest {
 	 */
 	@Test
 	public void testCreateRecipePass() {
-		f1.addResource("LUM", 6);
+		f1.addResource("COA", 6);
 		f1.addResource("IRO", 6);
 		assertTrue(f1.createRecipe(Recipe.STEEL));
 		assertEquals(2, f1.amountOf("STL"));
